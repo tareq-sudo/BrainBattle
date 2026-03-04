@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrainClash</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: #0D1117;
+  color: #F0F6FC;
+  direction: rtl;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.app { width: 100%; max-width: 480px; padding: 16px; margin: auto; }
+.btn {
+  background: linear-gradient(135deg, #6366F1, #4F46E5);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  font-family: 'Tajawal', sans-serif;
+  transition: opacity 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.card {
+  background: #161B22;
+  border: 1px solid #21262D;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+input {
+  background: #161B22;
+  border: 1px solid #21262D;
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #F0F6FC;
+  font-size: 16px;
+  font-family: 'Tajawal', sans-serif;
+  outline: none;
+  width: 100%;
+}
+.screen { display: none; }
+.screen.active { display: block; }
+.row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.topic-card {
+  background: #161B22;
+  border: 2px solid #21262D;
+  border-radius: 14px;
+  padding: 16px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.topic-card.selected { background: #6366F122; }
+.option-btn {
+  background: #161B22;
+  border: 2px solid #21262D;
+  border-radius: 14px;
+  padding: 14px 18px;
+  color: #F0F6FC;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: right;
+  cursor: pointer;
+  width: 100%;
+  font-family: 'Tajawal', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  transition: all 0.2s;
+}
+.option-btn:disabled { cursor: default; }
+.option-btn.correct { background: #10B98122; border-color: #10B981; color: #10B981; }
+.option-btn.wrong { background: #EF444422; border-color: #EF4444; color: #EF4444; }
+.option-btn.eliminated { opacity: 0.2; }
+.badge {
+  background: #6366F1;
+  color: #fff;
+  border-radius: 20px;
+  padding: 2px 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.powerup-btn {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  border: 1.5px solid;
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+}
+.powerup-btn:disabled { opacity: 0.25; cursor: default; }
+.progress-bar {
+  height: 4px;
+  background: #21262D;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366F1, #C084FC);
+  transition: width 0.3s;
+}
+.timer-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #21262D;
+  border-radius: 20px;
+  padding: 6px 14px;
+}
+.timer-box.danger { border-color: #EF4444; background: #EF444422; }
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: 18px;
+  margin-bottom: 10px;
+  border: 2px solid #21262D;
+  background: #161B22;
+}
+.result-row.first { border-color: #FFC107; background: #FFC10711; }
+.score-badge {
+  background: #6366F1;
+  color: #fff;
+  border-radius: 20px;
+  padding: 4px 16px;
+  font-weight: 900;
+  font-size: 18px;
+}
+.score-badge.gold { background: #FFC107; color: #000; }
+.count-btn {
+  padding: 10px 0;
+  width: 60px;
+  border-radius: 12px;
+  border: 1px solid #21262D;
+  background: #161B22;
+  color: #F0F6FC;
+  font-size: 16px;
+  font-family: 'Tajawal', sans-serif;
+  cursor: pointer;
+  font-weight: 700;
+}
+.count-btn.active {
+  background: linear-gradient(135deg, #6366F1, #4F46E5);
+  border-color: #6366F1;
+  color: #fff;
+}
+.double-banner {
+  background: #FFC10722;
+  border: 1px solid #FFC107;
+  border-radius: 12px;
+  padding: 6px 14px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #FFC107;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <div id="screen-home" class="screen active">
+    <div style="text-align:center; padding: 40px 0">
+      <div style="width:90px;height:90px;border-radius:24px;background:linear-gradient(135deg,#6366F1,#4F46E5);display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto 16px;box-shadow:0 0 40px #6366F188">⚡</div>
+      <h1 style="font-size:36px;font-weight:900;background:linear-gradient(135deg,#818CF8,#C084FC);-webkit-background-clip:text;-webkit-text-fill-color:transparent">BrainClash</h1>
+      <p style="color:#8B949E;margin:8px 0 40px;font-size:16px">تحدى أصدقاءك بأسئلة ذكية</p>
+      <button class="btn" onclick="goTo('players')">▶ ابدأ</button>
+      <div style="display:flex;justify-content:center;gap:32px;margin-top:32px">
+        <div style="text-align:center"><div style="font-size:24px;margin-bottom:4px">👥</div><div style="font-size:11px;color:#8B949E">2-8 لاعبين</div></div>
+        <div style="text-align:center"><div style="font-size:24px;margin-bottom:4px">🎯</div><div style="font-size:11px;color:#8B949E">8 تصنيفات</div></div>
+        <div style="text-align:center"><div style="font-size:24px;margin-bottom:4px">⚡</div><div style="font-size:11px;color:#8B949E">أدوات القوة</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYERS -->
+  <div id="screen-players" class="screen">
+    <div class="row">
+      <button onclick="goTo('home')" style="background:none;border:none;color:#8B949E;cursor:pointer;font-size:20px">→</button>
+      <h2 style="font-size:22px;font-weight:800">أضف اللاعبين</h2>
+      <span id="player-count" style="color:#8B949E;font-size:13px">0/8</span>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <input id="player-input" type="text" placeholder="اسم اللاعب..." onkeydown="if(event.key==='Enter')addPlayer()">
+      <button onclick="addPlayer()" style="background:linear-gradient(135deg,#6366F1,#4F46E5);border:none;border-radius:12px;width:48px;height:48px;font-size:24px;color:#fff;cursor:pointer;flex-shrink:0">+</button>
+    </div>
+    <div id="players-list" style="margin-bottom:16px"></div>
+    <button class="btn" id="btn-to-topics" onclick="goTo('topics')" disabled>التالي →</button>
+    <p id="players-hint" style="text-align:center;color:#8B949E;font-size:14px;margin-top:8px">أضف لاعبَيْن على الأقل للبدء</p>
+  </div>
+
+  <!-- TOPICS -->
+  <div id="screen-topics" class="screen">
+    <div class="row">
+      <button onclick="goTo('players')" style="background:none;border:none;color:#8B949E;cursor:pointer;font-size:20px">→</button>
+      <h2 style="font-size:22px;font-weight:800">اختر المواضيع</h2>
+      <span id="topics-count" class="badge">0 مختار</span>
+    </div>
+    <p style="color:#8B949E;text-align:center;margin-bottom:16px;font-size:14px">اختر مواضيع الأسئلة</p>
+    <div class="grid2" id="topics-grid"></div>
+    <p style="color:#8B949E;font-size:13px;text-align:center;margin:12px 0 8px">عدد الأسئلة لكل لاعب</p>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px" id="count-btns">
+      <button class="count-btn active" onclick="setCount(3)">3</button>
+      <button class="count-btn" onclick="setCount(5)">5</button>
+      <button class="count-btn" onclick="setCount(7)">7</button>
+      <button class="count-btn" onclick="setCount(10)">10</button>
+    </div>
+    <button class="btn" id="btn-start" onclick="startGame()" disabled>▶ ابدأ اللعبة</button>
+  </div>
+
+  <!-- GAME -->
+  <div id="screen-game" class="screen">
+    <div class="row" style="margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:18px">⭐</span>
+        <span id="current-score" style="font-weight:800;font-size:16px">0</span>
+      </div>
+      <span id="topic-badge" style="background:#6366F122;color:#818CF8;border-radius:20px;padding:2px 12px;font-size:13px;font-weight:700"></span>
+      <span id="q-counter" style="color:#8B949E;font-size:14px;font-weight:700">1/10</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="row">
+      <div class="timer-box" id="timer-box">
+        <span>⏱</span>
+        <span id="timer-num" style="font-weight:800;font-size:16px">15</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="color:#8B949E;font-size:14px">دور</span>
+        <span id="current-player-badge" style="background:#6366F1;color:#fff;border-radius:20px;padding:4px 14px;font-weight:800;font-size:15px"></span>
+      </div>
+    </div>
+    <div id="double-banner" class="double-banner" style="display:none">⚡ نقاط مضاعفة!</div>
+    <div class="card" style="text-align:center;margin-bottom:12px;padding:20px 16px">
+      <p id="question-text" style="margin:0;font-size:18px;font-weight:800;line-height:1.6"></p>
+    </div>
+    <div id="options-container"></div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px" id="powerups-container"></div>
+    <button class="btn" id="btn-next" onclick="nextQuestion()" style="display:none">السؤال التالي →</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="screen-results" class="screen">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:64px;margin-bottom:8px">🏆</div>
+      <h2 style="font-size:28px;font-weight:900;background:linear-gradient(135deg,#FFC107,#FF9800);-webkit-background-clip:text;-webkit-text-fill-color:transparent">النتائج النهائية</h2>
+    </div>
+    <div id="results-list"></div>
+    <button class="btn" style="margin-top:16px" onclick="resetGame()">🔄 لعبة جديدة</button>
+  </div>
+
+</div>
+
+<script>
+const TOPICS = [
+  { id:"geography", label:"جغرافيا", emoji:"🌍", color:"#00BCD4" },
+  { id:"history", label:"تاريخ", emoji:"🏛️", color:"#9C27B0" },
+  { id:"football", label:"كرة القدم", emoji:"⚽", color:"#2196F3" },
+  { id:"tech", label:"تقنية", emoji:"💻", color:"#4CAF50" },
+  { id:"games", label:"ألعاب", emoji:"🎮", color:"#E91E63" },
+  { id:"cars", label:"سيارات", emoji:"🚗", color:"#FF9800" },
+  { id:"culture", label:"ثقافة عامة", emoji:"💡", color:"#FFC107" },
+  { id:"funny", label:"تحديات مضحكة", emoji:"😂", color:"#F44336" },
+];
+
+const ALL_QUESTIONS = {
+  geography:[
+    {q:"ما هي عاصمة اليابان؟",options:["بكين","طوكيو","سيول","بانكوك"],answer:1},
+    {q:"أكبر قارة في العالم؟",options:["أفريقيا","أمريكا","آسيا","أوروبا"],answer:2},
+    {q:"أطول نهر في العالم؟",options:["الأمازون","النيل","المسيسيبي","الكونغو"],answer:1},
+    {q:"أعلى جبل في العالم؟",options:["K2","إيفرست","كيليمنجارو","مون بلان"],answer:1},
+    {q:"عاصمة البرازيل؟",options:["ريو","ساو باولو","برازيليا","سلفادور"],answer:2},
+    {q:"أكبر دولة مساحةً؟",options:["كندا","الصين","أمريكا","روسيا"],answer:3},
+    {q:"عاصمة أستراليا؟",options:["سيدني","ملبورن","كانبيرا","بريسبان"],answer:2},
+    {q:"أعمق بحيرة في العالم؟",options:["فيكتوريا","بايكال","سوبيريور","تيتيكاكا"],answer:1},
+    {q:"عاصمة كندا؟",options:["تورنتو","فانكوفر","مونتريال","أوتاوا"],answer:3},
+    {q:"أطول سلسلة جبال؟",options:["الهيمالايا","الأنديز","الألب","الروكي"],answer:1},
+  ],
+  history:[
+    {q:"متى قامت الثورة الفرنسية؟",options:["1776","1789","1812","1848"],answer:1},
+    {q:"من بنى الأهرامات؟",options:["الرومان","المصريون القدماء","الإغريق","الفينيقيون"],answer:1},
+    {q:"متى سقط جدار برلين؟",options:["1985","1987","1989","1991"],answer:2},
+    {q:"أول رئيس للولايات المتحدة؟",options:["جيفرسون","آدامز","واشنطن","فرانكلين"],answer:2},
+    {q:"من اخترع الطباعة؟",options:["جوتنبرج","نيوتن","داڤنشي","فرانكلين"],answer:0},
+    {q:"متى بدأت الحرب العالمية الثانية؟",options:["1935","1937","1939","1941"],answer:2},
+    {q:"أكبر إمبراطورية في التاريخ؟",options:["الرومانية","الإسلامية","البريطانية","المغولية"],answer:2},
+    {q:"أين نشأت الحضارة السومرية؟",options:["مصر","الهند","الرافدين","الصين"],answer:2},
+    {q:"في أي قرن فتح المسلمون الأندلس؟",options:["السادس","السابع","الثامن","التاسع"],answer:2},
+    {q:"من قاد جيوش الإسكندر الأكبر؟",options:["قيصر","الإسكندر نفسه","هانيبال","داريوس"],answer:1},
+  ],
+  football:[
+    {q:"كم مرة فاز البرازيل بكأس العالم؟",options:["3","4","5","6"],answer:2},
+    {q:"أكثر هداف في تاريخ كأس العالم؟",options:["رونالدو","ميسي","كلوزه","بيليه"],answer:2},
+    {q:"أين أقيمت كأس العالم 2022؟",options:["الإمارات","السعودية","قطر","البحرين"],answer:2},
+    {q:"أكثر فريق فاز بدوري الأبطال؟",options:["برشلونة","ميلان","ريال مدريد","بايرن"],answer:2},
+    {q:"جائزة أفضل لاعب في العالم؟",options:["الكرة الذهبية","القدم الذهبية","النجم الذهبي","كأس العالم"],answer:0},
+    {q:"ملعب سانتياغو برنابيو في؟",options:["برشلونة","مدريد","مانشستر","لندن"],answer:1},
+    {q:"كم دقيقة المباراة؟",options:["80","85","90","95"],answer:2},
+    {q:"هداف منتخب البرازيل التاريخي؟",options:["رونالدو","رونالدينيو","نيمار","بيليه"],answer:2},
+    {q:"أول فوز فرنسا بكأس العالم؟",options:["1994","1998","2002","2006"],answer:1},
+    {q:"كم لاعباً في كل فريق؟",options:["9","10","11","12"],answer:2},
+  ],
+  tech:[
+    {q:'ماذا تعني "RAM"؟',options:["ذاكرة القراءة فقط","ذاكرة الوصول العشوائي","ذاكرة التطبيقات","وحدة الوصول السريع"],answer:1},
+    {q:'ماذا تعني "HTML"؟',options:["لغة ترميز النص الفائق","لغة برمجة عالية","محطة النص","لغة الأدوات"],answer:0},
+    {q:"من مؤسس Apple؟",options:["بيل غيتس","ستيف جوبز","زوكربرج","ماسك"],answer:1},
+    {q:"أكثر متصفح استخداماً؟",options:["Firefox","Safari","Chrome","Edge"],answer:2},
+    {q:"ماذا يعني CPU؟",options:["وحدة القدرة","وحدة المعالجة المركزية","وحدة الطاقة","وحدة البرمجة"],answer:1},
+    {q:"أول iPhone صدر عام؟",options:["2005","2006","2007","2008"],answer:2},
+    {q:"كم بت في البايت؟",options:["4","6","8","16"],answer:2},
+    {q:"نظام تشغيل Apple للماك؟",options:["Windows","Linux","macOS","Android"],answer:2},
+    {q:"الذكاء الاصطناعي من OpenAI؟",options:["Gemini","Claude","ChatGPT","Copilot"],answer:2},
+    {q:"لغة برمجة مواقع الويب؟",options:["Python","Java","HTML/CSS","C++"],answer:2},
+  ],
+  games:[
+    {q:"لعبة إنقاذ الأميرة Zelda؟",options:["Mario","Zelda","Metroid","Kirby"],answer:1},
+    {q:"من طور لعبة GTA؟",options:["EA","Ubisoft","Rockstar","Activision"],answer:2},
+    {q:"أكثر لعبة مبيعاً في التاريخ؟",options:["Tetris","Minecraft","GTA V","Mario"],answer:1},
+    {q:"العدو الأشهر في Minecraft؟",options:["Zombie","Skeleton","Creeper","Enderman"],answer:2},
+    {q:"من ينتج PlayStation؟",options:["Microsoft","Nintendo","Sony","Sega"],answer:2},
+    {q:"عالم لعبة Zelda يسمى؟",options:["Hyrule","Mushroom Kingdom","Termina","Lorule"],answer:0},
+    {q:"الشخصية الرئيسية في Mario؟",options:["Luigi","Toad","Mario","Bowser"],answer:2},
+    {q:"أول جيل PlayStation صدر عام؟",options:["1990","1992","1994","1996"],answer:2},
+    {q:"من يطور لعبة FIFA؟",options:["Ubisoft","EA Sports","2K","Konami"],answer:1},
+    {q:"اللعبة الشهيرة من Valve؟",options:["Overwatch","CS:GO","Valorant","Apex"],answer:1},
+  ],
+  cars:[
+    {q:"من صنع أول سيارة في التاريخ؟",options:["فورد","بنز","رولز رويس","بيجو"],answer:1},
+    {q:"Ferrari تأسست في؟",options:["فرنسا","ألمانيا","إيطاليا","إسبانيا"],answer:2},
+    {q:"ما معنى BMW؟",options:["مصانع بفاريا للسيارات","أفضل مركبة","مصانع بفاريا للمحركات","سيارات بفاريا"],answer:2},
+    {q:"أي شركة تنتج Mustang؟",options:["Chevrolet","Ford","Dodge","Pontiac"],answer:1},
+    {q:"أول شركة سيارات كهربائية شهيرة؟",options:["Rivian","Lucid","Tesla","NIO"],answer:2},
+    {q:"أي دولة تنتج Toyota؟",options:["كوريا","الصين","اليابان","ألمانيا"],answer:2},
+    {q:"عاصمة صناعة السيارات الأمريكية؟",options:["نيويورك","شيكاغو","ديترويت","لوس أنجلوس"],answer:2},
+    {q:"أسرع سيارة إنتاجية تقريباً؟",options:["400 كم/س","420 كم/س","450 كم/س","490 كم/س"],answer:3},
+    {q:"Rolls-Royce مقرها في؟",options:["لندن","بيرمنغهام","مانشستر","ليدز"],answer:0},
+    {q:"كم إطاراً في السيارة العادية؟",options:["3","4","5","6"],answer:1},
+  ],
+  culture:[
+    {q:"من كتب روميو وجولييت؟",options:["ديكنز","شكسبير","تولستوي","هوميروس"],answer:1},
+    {q:"كم عدد ألوان قوس قزح؟",options:["5","6","7","8"],answer:2},
+    {q:"أسرع حيوان في العالم؟",options:["الأسد","النمر","الفهد","الذئب"],answer:2},
+    {q:"من رسم الموناليزا؟",options:["مايكل أنجلو","رافائيل","داڤنشي","بيكاسو"],answer:2},
+    {q:"كم كوكباً في المجموعة الشمسية؟",options:["7","8","9","10"],answer:1},
+    {q:"أكبر المحيطات؟",options:["الأطلسي","الهندي","المتجمد الشمالي","الهادي"],answer:3},
+    {q:"من اخترع التلفزيون؟",options:["إديسون","بيرد","تسلا","ماركوني"],answer:1},
+    {q:"كم يوم في السنة الكبيسة؟",options:["364","365","366","367"],answer:2},
+    {q:"من اخترع الهاتف؟",options:["إديسون","تسلا","غراهام بيل","ماركوني"],answer:2},
+    {q:"أثقل عنصر طبيعي؟",options:["الذهب","الرصاص","اليورانيوم","الأوزميوم"],answer:3},
+  ],
+  funny:[
+    {q:"لو كان لديك ذيل ماذا ستفعل؟",options:["أهزه للجميع","أخبئه","أستخدمه مقعداً","أبيعه"],answer:0},
+    {q:"أصعب شيء بعيون مغمضة؟",options:["المشي","الأكل","الكتابة","الطيران"],answer:3},
+    {q:"لو كنت طعاماً ماذا ستكون؟",options:["بيتزا","سوشي","برغر","فلافل"],answer:0},
+    {q:"أكثر حيوان كسلاً؟",options:["القطة","الكسلان","الدب","البطريق"],answer:1},
+    {q:"أول شيء عند الاستيقاظ؟",options:["تتفرج في الهاتف","تشرب ماء","تأكل","ترجع تنام"],answer:3},
+    {q:"لو تكلم حيوان أيه تختار؟",options:["القطة","الكلب","الدولفين","البومة"],answer:2},
+    {q:"لو كنت خارقاً ما قوتك؟",options:["الطيران","الخفاء","قراءة الأفكار","السرعة"],answer:0},
+    {q:"أكثر شيء تكره فعله؟",options:["التنظيف","الدراسة","الاستيقاظ مبكراً","التمرين"],answer:2},
+    {q:"لو فزت بمليون ريال أول شيء؟",options:["سيارة","بيت","سفر","طعام"],answer:0},
+    {q:"أغرب طعام جربته؟",options:["حشرات","أخطبوط حي","دودة شوكولاتة","لا شيء غريب"],answer:3},
+  ],
+};
+
+const PLAYER_COLORS = ["#6366F1","#EC4899","#F59E0B","#10B981","#3B82F6","#8B5CF6","#EF4444","#06B6D4"];
+const POWERUPS_DEF = [
+  {id:"eliminate", icon:"✂️", label:"حذف إجابتين", color:"#E91E63"},
+  {id:"double",    icon:"⚡", label:"مضاعفة النقاط", color:"#FFC107"},
+  {id:"skip",      icon:"⏭️", label:"تجاوز السؤال",  color:"#2196F3"},
+  {id:"time",      icon:"⏰", label:"زيادة الوقت",    color:"#4CAF50"},
+];
+
+let players=[], selectedTopics=[], questionCount=3, questions=[];
+let currentQ=0, currentPlayerIdx=0, scores={}, powerups={};
+let timerVal=15, timerInterval=null, eliminated=[], doubled=false, answered=false;
+
+function goTo(s) {
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  document.getElementById('screen-'+s).classList.add('active');
+}
+
+function addPlayer() {
+  const input = document.getElementById('player-input');
+  const name = input.value.trim();
+  if (!name || players.length>=8 || players.includes(name)) return;
+  players.push(name);
+  input.value='';
+  renderPlayers();
+}
+
+function removePlayer(name) {
+  players = players.filter(p=>p!==name);
+  renderPlayers();
+}
+
+function renderPlayers() {
+  document.getElementById('player-count').textContent = players.length+'/8';
+  document.getElementById('players-hint').style.display = players.length>=2?'none':'block';
+  document.getElementById('btn-to-topics').disabled = players.length<2;
+  const list = document.getElementById('players-list');
+  list.innerHTML = players.map((p,i)=>`
+    <div style="background:#161B22;border:1px solid #21262D;border-radius:14px;padding:12px 16px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
+      <span style="font-weight:700">${p}</span>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="width:32px;height:32px;border-radius:50%;background:${PLAYER_COLORS[i]};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:14px">${p[0]}</span>
+        <button onclick="removePlayer('${p}')" style="background:none;border:none;color:#EF4444;cursor:pointer;font-size:18px">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderTopics() {
+  const grid = document.getElementById('topics-grid');
+  grid.innerHTML = TOPICS.map(t=>`
+    <div class="topic-card ${selectedTopics.includes(t.id)?'selected':''}"
+      id="topic-${t.id}"
+      style="border-color:${selectedTopics.includes(t.id)?t.color:'#21262D'};background:${selectedTopics.includes(t.id)?t.color+'22':'#161B22'}"
+      onclick="toggleTopic('${t.id}','${t.color}')">
+      ${selectedTopics.includes(t.id)?`<div style="position:absolute;top:8px;left:8px;width:18px;height:18px;border-radius:50%;background:${t.color};display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px">✓</div>`:''}
+      <div style="font-size:30px;margin-bottom:6px">${t.emoji}</div>
+      <div style="font-weight:700;font-size:13px">${t.label}</div>
+    </div>`).join('');
+  document.getElementById('topics-count').textContent = selectedTopics.length+' مختار';
+  document.getElementById('btn-start').disabled = selectedTopics.length===0;
+}
+
+function toggleTopic(id, color) {
+  if (selectedTopics.includes(id)) selectedTopics=selectedTopics.filter(x=>x!==id);
+  else selectedTopics.push(id);
+  renderTopics();
+}
+
+function setCount(n) {
+  questionCount=n;
+  document.querySelectorAll('.count-btn').forEach(b=>{
+    b.classList.toggle('active', parseInt(b.textContent)===n);
+  });
+}
+
+function buildQuestions() {
+  let pool=[];
+  selectedTopics.forEach(t=>{
+    (ALL_QUESTIONS[t]||[]).forEach(q=>pool.push({...q,topic:t}));
+  });
+  pool.sort(()=>Math.random()-0.5);
+  return pool.slice(0, players.length*questionCount);
+}
+
+function startGame() {
+  questions=buildQuestions();
+  scores={}; powerups={};
+  players.forEach(p=>{
+    scores[p]=0;
+    powerups[p]={eliminate:true,double:true,skip:true,time:true};
+  });
+  currentQ=0; currentPlayerIdx=0;
+  goTo('game');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if (currentQ>=questions.length) { showResults(); return; }
+  const q=questions[currentQ];
+  const player=players[currentPlayerIdx];
+  const color=PLAYER_COLORS[currentPlayerIdx];
+  answered=false; eliminated=[]; doubled=false;
+
+  document.getElementById('current-score').textContent=scores[player]||0;
+  const topic=TOPICS.find(t=>t.id===q.topic);
+  document.getElementById('topic-badge').textContent=(topic?.emoji||'')+'  '+(topic?.label||'');
+  document.getElementById('q-counter').textContent=(currentQ+1)+' / '+questions.length;
+  document.getElementById('progress-fill').style.width=((currentQ/questions.length)*100)+'%';
+  document.getElementById('current-player-badge').textContent=player;
+  document.getElementById('current-player-badge').style.background=color;
+  document.getElementById('double-banner').style.display='none';
+  document.getElementById('question-text').textContent=q.q;
+  document.getElementById('btn-next').style.display='none';
+
+  // Options
+  const cont=document.getElementById('options-container');
+  cont.innerHTML=q.options.map((opt,i)=>`
+    <button class="option-btn" id="opt-${i}" onclick="handleAnswer(${i})">
+      <span style="width:28px;height:28px;border-radius:50%;background:#6366F122;color:#818CF8;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0">${['A','B','C','D'][i]}</span>
+      ${opt}
+    </button>`).join('');
+
+  // Powerups
+  const pc=document.getElementById('powerups-container');
+  pc.innerHTML=POWERUPS_DEF.map(pu=>`
+    <button class="powerup-btn" id="pu-${pu.id}"
+      style="border-color:${powerups[player][pu.id]?pu.color:'transparent'};color:${pu.color};background:${powerups[player][pu.id]?pu.color+'22':'#21262D'}"
+      ${!powerups[player][pu.id]?'disabled':''}
+      onclick="usePowerup('${pu.id}')"
+      title="${pu.label}">${pu.icon}</button>`).join('');
+
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timerVal=15;
+  updateTimer();
+  timerInterval=setInterval(()=>{
+    timerVal--;
+    updateTimer();
+    if(timerVal<=0){
+      clearInterval(timerInterval);
+      if(!answered) handleAnswer(-1);
+    }
+  },1000);
+}
+
+function updateTimer() {
+  document.getElementById('timer-num').textContent=timerVal;
+  const box=document.getElementById('timer-box');
+  if(timerVal<=5){ box.classList.add('danger'); }
+  else { box.classList.remove('danger'); }
+}
+
+function handleAnswer(idx) {
+  if(answered) return;
+  answered=true;
+  clearInterval(timerInterval);
+  const q=questions[currentQ];
+  const player=players[currentPlayerIdx];
+
+  for(let i=0;i<4;i++){
+    const btn=document.getElementById('opt-'+i);
+    if(!btn) continue;
+    btn.disabled=true;
+    if(i===q.answer) btn.classList.add('correct');
+    else if(i===idx) btn.classList.add('wrong');
+    const span=btn.querySelector('span');
+    if(span){
+      if(i===q.answer) { span.style.background='#10B981'; span.style.color='#fff'; span.textContent='✓'; }
+      else if(i===idx) { span.style.background='#EF4444'; span.style.color='#fff'; span.textContent='✕'; }
+    }
+  }
+
+  if(idx===q.answer){
+    const pts=doubled?20:10;
+    scores[player]=(scores[player]||0)+pts;
+    document.getElementById('current-score').textContent=scores[player];
+  }
+
+  document.getElementById('btn-next').style.display='block';
+  const isLast=currentQ+1>=questions.length;
+  document.getElementById('btn-next').textContent=isLast?'🏆 النتائج':'السؤال التالي →';
+}
+
+function nextQuestion() {
+  currentQ++;
+  currentPlayerIdx=(currentPlayerIdx+1)%players.length;
+  renderQuestion();
+}
+
+function usePowerup(type) {
+  if(answered) return;
+  const player=players[currentPlayerIdx];
+  if(!powerups[player][type]) return;
+  powerups[player][type]=false;
+  document.getElementById('pu-'+type).disabled=true;
+  document.getElementById('pu-'+type).style.opacity='0.25';
+
+  if(type==='eliminate'){
+    const q=questions[currentQ];
+    const wrong=[0,1,2,3].filter(i=>i!==q.answer).sort(()=>Math.random()-0.5).slice(0,2);
+    wrong.forEach(i=>{
+      const btn=document.getElementById('opt-'+i);
+      if(btn){ btn.classList.add('eliminated'); btn.disabled=true; }
+    });
+  } else if(type==='double'){
+    doubled=true;
+    document.getElementById('double-banner').style.display='block';
+  } else if(type==='skip'){
+    answered=true;
+    clearInterval(timerInterval);
+    nextQuestion();
+  } else if(type==='time'){
+    timerVal+=15;
+    updateTimer();
+  }
+}
+
+function showResults() {
+  goTo('results');
+  const sorted=[...players].sort((a,b)=>(scores[b]||0)-(scores[a]||0));
+  const medals=['🥇','🥈','🥉'];
+  document.getElementById('results-list').innerHTML=sorted.map((p,i)=>`
+    <div class="result-row ${i===0?'first':''}">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:26px">${medals[i]||'#'+(i+1)}</span>
+        <span style="font-weight:800;font-size:17px">${p}</span>
+      </div>
+      <span class="score-badge ${i===0?'gold':''}">${scores[p]||0} ⭐</span>
+    </div>`).join('');
+}
+
+function resetGame() {
+  players=[]; selectedTopics=[]; questionCount=3; questions=[];
+  currentQ=0; currentPlayerIdx=0; scores={}; powerups={};
+  goTo('home');
+}
+
+// Init topics on page load
+renderTopics();
+</script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
