@@ -6,8 +6,8 @@
 <title>MindClash</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0D1117;--card:#161B22;--border:#21262D;--text:#F0F6FC;--subtext:#8B949E;--accent:#6366F1;}
-.light{--bg:#F5F7FF;--card:#FFFFFF;--border:#E0E7FF;--text:#111827;--subtext:#6B7280;--accent:#6366F1;}
+:root{--bg:#0D1117;--card:#161B22;--border:#21262D;--text:#F0F6FC;--subtext:#8B949E;}
+.light{--bg:#F5F7FF;--card:#FFFFFF;--border:#E0E7FF;--text:#111827;--subtext:#6B7280;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);direction:rtl;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;transition:background 0.3s,color 0.3s;}
 .app{width:100%;max-width:480px;padding:16px;margin:auto;}
@@ -15,7 +15,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);dir
 .btn:hover{opacity:0.9;}
 .btn:disabled{opacity:0.4;cursor:default;}
 .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:12px;transition:background 0.3s,border-color 0.3s;}
-input{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--text);font-size:16px;font-family:'Tajawal',sans-serif;outline:none;width:100%;transition:background 0.3s,border-color 0.3s,color 0.3s;}
+input{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--text);font-size:16px;font-family:'Tajawal',sans-serif;outline:none;width:100%;transition:all 0.3s;}
 .screen{display:none;}
 .screen.active{display:block;}
 .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
@@ -26,13 +26,13 @@ input{background:var(--card);border:1px solid var(--border);border-radius:12px;p
 .option-btn.correct{background:#10B98122;border-color:#10B981;color:#10B981;}
 .option-btn.wrong{background:#EF444422;border-color:#EF4444;color:#EF4444;}
 .option-btn.eliminated{opacity:0.2;}
-.badge{background:var(--accent);color:#fff;border-radius:20px;padding:2px 12px;font-size:13px;font-weight:700;}
+.badge{background:#6366F1;color:#fff;border-radius:20px;padding:2px 12px;font-size:13px;font-weight:700;}
 .powerup-btn{width:52px;height:52px;border-radius:14px;border:1.5px solid;font-size:22px;cursor:pointer;transition:all 0.2s;background:transparent;}
 .powerup-btn:disabled{opacity:0.25;cursor:default;}
 .progress-bar{height:4px;background:var(--border);border-radius:4px;margin-bottom:12px;overflow:hidden;}
 .progress-fill{height:100%;background:linear-gradient(90deg,#6366F1,#C084FC);transition:width 0.3s;}
 .timer-box{display:flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:20px;padding:6px 14px;background:var(--card);transition:all 0.3s;}
-.timer-box.danger{border-color:#EF4444;background:#EF444422;}
+.timer-box.danger{border-color:#EF4444!important;background:#EF444422!important;}
 .result-row{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-radius:18px;margin-bottom:10px;border:2px solid var(--border);background:var(--card);}
 .result-row.first{border-color:#FFC107;background:#FFC10711;}
 .score-badge{background:#6366F1;color:#fff;border-radius:20px;padding:4px 16px;font-weight:900;font-size:18px;}
@@ -40,19 +40,21 @@ input{background:var(--card);border:1px solid var(--border);border-radius:12px;p
 .count-btn{padding:10px 0;width:60px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:16px;font-family:'Tajawal',sans-serif;cursor:pointer;font-weight:700;}
 .count-btn.active{background:linear-gradient(135deg,#6366F1,#4F46E5);border-color:#6366F1;color:#fff;}
 .double-banner{background:#FFC10722;border:1px solid #FFC107;border-radius:12px;padding:6px 14px;margin-bottom:10px;text-align:center;color:#FFC107;font-weight:700;}
-.theme-toggle{background:var(--card);border:1px solid var(--border);border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all 0.3s;}
+.theme-toggle{background:var(--card);border:1px solid var(--border);border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;}
 .solo-hint{background:#6366F122;border:1px solid #6366F1;border-radius:12px;padding:8px 14px;text-align:center;color:#818CF8;font-size:13px;margin-bottom:12px;}
-.avatar-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--border);background:var(--card);font-size:22px;cursor:pointer;transition:all 0.2s;}
-.avatar-btn.selected{border-color:#6366F1;background:#6366F122;}
-.loading-screen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;}
-.spinner{width:50px;height:50px;border:4px solid var(--border);border-top-color:#6366F1;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:16px;}
-@keyframes spin{to{transform:rotate(360deg);}}
+.avatar-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;cursor:pointer;border:2px solid transparent;transition:all 0.2s;color:#fff;}
+.avatar-circle.selected{border-color:#fff;transform:scale(1.15);box-shadow:0 0 12px rgba(99,102,241,0.6);}
+.diff-badge{border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;}
+.diff-easy{background:#10B98122;color:#10B981;border:1px solid #10B981;}
+.diff-medium{background:#FFC10722;color:#FFC107;border:1px solid #FFC107;}
+.diff-hard{background:#EF444422;color:#EF4444;border:1px solid #EF4444;}
 .stat-bar-bg{background:var(--border);border-radius:10px;height:8px;overflow:hidden;margin-top:4px;}
 .stat-bar-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,#6366F1,#C084FC);transition:width 0.8s;}
 .leaderboard-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:12px;margin-bottom:6px;background:var(--card);border:1px solid var(--border);}
-.speed-badge{background:#EF444422;border:1px solid #EF4444;color:#EF4444;border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700;}
 .tab-btn{flex:1;padding:10px;border:none;background:none;color:var(--subtext);font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;}
 .tab-btn.active{color:#6366F1;border-bottom-color:#6366F1;}
+.pulse{animation:pulse 0.3s ease;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
 </style>
 </head>
 <body>
@@ -62,7 +64,7 @@ input{background:var(--card);border:1px solid var(--border);border-radius:12px;p
 <div id="screen-home" class="screen active">
   <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0 0">
     <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙</button>
-    <button onclick="showTab('leaderboard')" style="background:none;border:none;color:var(--subtext);cursor:pointer;font-size:13px;font-weight:700">🏆 المتصدرين</button>
+    <button onclick="goTo('leaderboard')" style="background:none;border:none;color:var(--subtext);cursor:pointer;font-size:13px;font-weight:700">🏆 المتصدرين</button>
   </div>
   <div style="text-align:center;padding:24px 0 32px">
     <div style="width:90px;height:90px;border-radius:24px;background:linear-gradient(135deg,#6366F1,#4F46E5);display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto 16px;box-shadow:0 0 40px #6366F188">⚡</div>
@@ -72,8 +74,8 @@ input{background:var(--card);border:1px solid var(--border);border-radius:12px;p
     <div style="display:flex;justify-content:center;gap:24px;margin-top:28px">
       <div style="text-align:center"><div style="font-size:24px;margin-bottom:4px">👥</div><div style="font-size:11px;color:var(--subtext)">1-8 لاعبين</div></div>
       <div style="text-align:center"><div style="font-size:24px;margin-bottom:4px">🎯</div><div style="font-size:11px;color:var(--subtext)">8 تصنيفات</div></div>
-      <div style="text-align:center"><div style="font-size:24px;margin-bottom:4px">🤖</div><div style="font-size:11px;color:var(--subtext)">أسئلة بالذكاء</div></div>
-      <div style="text-align:center"><div style="font-size:24px;margin-bottom:4px">⚡</div><div style="font-size:11px;color:var(--subtext)">أدوات القوة</div></div>
+      <div style="text-align:center"><div style="font-size:24px;margin-bottom:4px">📈</div><div style="font-size:11px;color:var(--subtext)">صعوبة متدرجة</div></div>
+      <div style="text-align:center"><div style="font-size:24px;margin-bottom:4px">🔊</div><div style="font-size:11px;color:var(--subtext)">مؤثرات صوتية</div></div>
     </div>
   </div>
 </div>
@@ -82,7 +84,7 @@ input{background:var(--card);border:1px solid var(--border);border-radius:12px;p
 <div id="screen-leaderboard" class="screen">
   <div class="row">
     <button onclick="goTo('home')" style="background:none;border:none;color:var(--subtext);cursor:pointer;font-size:20px">→</button>
-    <h2 style="font-size:22px;font-weight:800">🏆 لوحة المتصدرين</h2>
+    <h2 style="font-size:22px;font-weight:800">🏆 المتصدرين</h2>
     <button onclick="clearLeaderboard()" style="background:none;border:none;color:#EF4444;cursor:pointer;font-size:12px">مسح</button>
   </div>
   <div id="leaderboard-list"></div>
@@ -96,12 +98,8 @@ input{background:var(--card);border:1px solid var(--border);border-radius:12px;p
     <span id="player-count" style="color:var(--subtext);font-size:13px">0/8</span>
   </div>
   <div class="solo-hint">💡 يمكنك اللعب بمفردك! أضف اسمك فقط</div>
-  <div style="margin-bottom:12px">
-    <p style="color:var(--subtext);font-size:13px;margin-bottom:8px">اختر أفاتار</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap" id="avatar-picker">
-      🦁 🐯 🦊 🐺 🐸 🦄 👾 🤖 🎭 🔥 ⚡ 🌟
-    </div>
-  </div>
+  <p style="color:var(--subtext);font-size:13px;margin-bottom:8px">اختر لون</p>
+  <div id="avatar-picker" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"></div>
   <div style="display:flex;gap:8px;margin-bottom:16px">
     <input id="player-input" type="text" placeholder="اسم اللاعب..." onkeydown="if(event.key==='Enter')addPlayer()">
     <button onclick="addPlayer()" style="background:linear-gradient(135deg,#6366F1,#4F46E5);border:none;border-radius:12px;width:48px;height:48px;font-size:24px;color:#fff;cursor:pointer;flex-shrink:0">+</button>
@@ -119,11 +117,9 @@ input{background:var(--card);border:1px solid var(--border);border-radius:12px;p
     <span id="topics-count" class="badge">0 مختار</span>
   </div>
   <div class="grid2" id="topics-grid"></div>
-  <div style="margin:12px 0">
-    <div style="display:flex;border-bottom:1px solid var(--border);margin-bottom:12px">
-      <button class="tab-btn active" id="tab-normal" onclick="setMode('normal')">عادي ⏱ 15ث</button>
-      <button class="tab-btn" id="tab-speed" onclick="setMode('speed')">سرعة ⚡ 5ث</button>
-    </div>
+  <div style="display:flex;border-bottom:1px solid var(--border);margin:12px 0">
+    <button class="tab-btn active" id="tab-normal" onclick="setMode('normal')">عادي ⏱ 15ث</button>
+    <button class="tab-btn" id="tab-speed" onclick="setMode('speed')">سرعة ⚡ 5ث</button>
   </div>
   <p style="color:var(--subtext);font-size:13px;text-align:center;margin-bottom:8px">عدد الأسئلة لكل لاعب</p>
   <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px">
@@ -135,38 +131,28 @@ input{background:var(--card);border:1px solid var(--border);border-radius:12px;p
   <button class="btn" id="btn-start" onclick="startGame()" disabled>▶ ابدأ اللعبة</button>
 </div>
 
-<!-- LOADING -->
-<div id="screen-loading" class="screen">
-  <div style="text-align:center;padding:80px 0">
-    <div class="spinner" style="margin:0 auto 16px"></div>
-    <p style="font-size:18px;font-weight:700;color:var(--subtext)">🤖 الذكاء الاصطناعي يولّد الأسئلة...</p>
-    <p style="font-size:13px;color:var(--subtext);margin-top:8px">أسئلة جديدة وحصرية لكل جولة!</p>
-  </div>
-</div>
-
 <!-- GAME -->
 <div id="screen-game" class="screen">
   <div class="row" style="margin-bottom:8px">
-    <div style="display:flex;align-items:center;gap:6px">
-      <span id="player-avatar-display" style="font-size:20px">⚡</span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div id="player-avatar-display" style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff"></div>
       <span style="font-size:18px">⭐</span>
       <span id="current-score" style="font-weight:800;font-size:16px">0</span>
     </div>
-    <span id="topic-badge" style="background:#6366F122;color:#818CF8;border-radius:20px;padding:2px 12px;font-size:13px;font-weight:700"></span>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span id="diff-badge" class="diff-badge diff-easy">سهل</span>
+      <span id="topic-badge" style="background:#6366F122;color:#818CF8;border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700"></span>
+    </div>
     <span id="q-counter" style="color:var(--subtext);font-size:14px;font-weight:700"></span>
   </div>
   <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
   <div class="row">
-    <div class="timer-box" id="timer-box">
-      <span>⏱</span>
-      <span id="timer-num" style="font-weight:800;font-size:16px">15</span>
-    </div>
+    <div class="timer-box" id="timer-box"><span>⏱</span><span id="timer-num" style="font-weight:800;font-size:16px">15</span></div>
     <div style="display:flex;align-items:center;gap:8px">
       <span style="color:var(--subtext);font-size:14px">دور</span>
-      <span id="current-player-badge" style="background:#6366F1;color:#fff;border-radius:20px;padding:4px 14px;font-weight:800;font-size:15px"></span>
+      <span id="current-player-badge" style="color:#fff;border-radius:20px;padding:4px 14px;font-weight:800;font-size:15px"></span>
     </div>
   </div>
-  <div id="speed-indicator" style="display:none;text-align:center;margin-bottom:8px"><span class="speed-badge">⚡ وضع السرعة</span></div>
   <div id="double-banner" class="double-banner" style="display:none">⚡ نقاط مضاعفة!</div>
   <div class="card" style="text-align:center;padding:20px 16px">
     <p id="question-text" style="margin:0;font-size:18px;font-weight:800;line-height:1.6"></p>
@@ -188,7 +174,6 @@ input{background:var(--card);border:1px solid var(--border);border-radius:12px;p
 </div>
 
 </div>
-
 <script>
 const TOPICS=[
   {id:"geography",label:"جغرافيا",emoji:"🌍",color:"#00BCD4"},
@@ -200,29 +185,225 @@ const TOPICS=[
   {id:"culture",label:"ثقافة عامة",emoji:"💡",color:"#FFC107"},
   {id:"funny",label:"تحديات مضحكة",emoji:"😂",color:"#F44336"},
 ];
-const AVATARS=["🦁","🐯","🦊","🐺","🐸","🦄","👾","🤖","🎭","🔥","⚡","🌟"];
-const PLAYER_COLORS=["#6366F1","#EC4899","#F59E0B","#10B981","#3B82F6","#8B5CF6","#EF4444","#06B6D4"];
+const AVATAR_COLORS=[
+  {bg:"#6366F1"},{bg:"#EC4899"},{bg:"#F59E0B"},{bg:"#10B981"},
+  {bg:"#3B82F6"},{bg:"#8B5CF6"},{bg:"#EF4444"},{bg:"#06B6D4"},
+  {bg:"#84CC16"},{bg:"#F97316"},{bg:"#14B8A6"},{bg:"#A855F7"},
+];
 const POWERUPS_DEF=[
   {id:"eliminate",icon:"✂️",label:"حذف إجابتين",color:"#E91E63"},
   {id:"double",icon:"⚡",label:"مضاعفة النقاط",color:"#FFC107"},
   {id:"skip",icon:"⏭️",label:"تجاوز السؤال",color:"#2196F3"},
   {id:"time",icon:"⏰",label:"زيادة الوقت",color:"#4CAF50"},
 ];
+const QB={
+  geography:[
+    {q:"عاصمة فرنسا؟",o:["برلين","باريس","روما","مدريد"],a:1,d:"easy"},
+    {q:"عاصمة اليابان؟",o:["بكين","طوكيو","سيول","بانكوك"],a:1,d:"easy"},
+    {q:"أكبر قارة في العالم؟",o:["أفريقيا","أمريكا","آسيا","أوروبا"],a:2,d:"easy"},
+    {q:"أطول نهر في العالم؟",o:["الأمازون","النيل","المسيسيبي","الفولغا"],a:1,d:"easy"},
+    {q:"عاصمة أستراليا؟",o:["سيدني","ملبورن","كانبيرا","بريسبان"],a:2,d:"easy"},
+    {q:"عاصمة البرازيل؟",o:["ريو","ساو باولو","برازيليا","سلفادور"],a:2,d:"easy"},
+    {q:"أكبر دولة مساحة؟",o:["كندا","الصين","أمريكا","روسيا"],a:3,d:"easy"},
+    {q:"عاصمة كندا؟",o:["تورنتو","فانكوفر","مونتريال","أوتاوا"],a:3,d:"easy"},
+    {q:"عاصمة إيطاليا؟",o:["ميلان","فينيسيا","روما","نابولي"],a:2,d:"easy"},
+    {q:"عاصمة إسبانيا؟",o:["برشلونة","مدريد","إشبيلية","فالنسيا"],a:1,d:"easy"},
+    {q:"عاصمة ألمانيا؟",o:["ميونخ","هامبورغ","برلين","فرانكفورت"],a:2,d:"easy"},
+    {q:"عاصمة المكسيك؟",o:["غوادالاخارا","مونتيري","مكسيكو سيتي","كانكون"],a:2,d:"easy"},
+    {q:"أعمق بحيرة في العالم؟",o:["فيكتوريا","بايكال","سوبيريور","تيتيكاكا"],a:1,d:"medium"},
+    {q:"أعلى جبل في العالم؟",o:["K2","إيفرست","كيليمنجارو","مون بلان"],a:1,d:"medium"},
+    {q:"أكبر صحراء في العالم؟",o:["الصحراء الكبرى","جوبي","أنتاركتيكا","ربع الخالي"],a:2,d:"medium"},
+    {q:"أطول سلسلة جبال؟",o:["الهيمالايا","الأنديز","الألب","الروكي"],a:1,d:"medium"},
+    {q:"كم عدد دول أفريقيا؟",o:["45","54","62","70"],a:1,d:"medium"},
+    {q:"أكبر جزيرة في العالم؟",o:["أستراليا","بورنيو","غرينلاند","مدغشقر"],a:2,d:"medium"},
+    {q:"أين يقع نهر الأمازون؟",o:["أفريقيا","آسيا","أمريكا الجنوبية","أمريكا الشمالية"],a:2,d:"medium"},
+    {q:"ما هو أصغر قارة؟",o:["أوروبا","أنتاركتيكا","أستراليا","أمريكا الجنوبية"],a:2,d:"medium"},
+    {q:"عاصمة كازاخستان؟",o:["ألماتي","أستانا","شيمكنت","كاراغاندا"],a:1,d:"hard"},
+    {q:"ما هو أصغر دولة في العالم؟",o:["موناكو","سان مارينو","الفاتيكان","ليختنشتاين"],a:2,d:"hard"},
+    {q:"أين يقع بحر آرال؟",o:["أوزبكستان وكازاخستان","روسيا وأوكرانيا","إيران والعراق","تركمانستان وأفغانستان"],a:0,d:"hard"},
+    {q:"ما عاصمة بوتان؟",o:["كاتماندو","تيمفو","دكا","كولومبو"],a:1,d:"hard"},
+  ],
+  history:[
+    {q:"متى قامت الثورة الفرنسية؟",o:["1776","1789","1812","1848"],a:1,d:"easy"},
+    {q:"من بنى الأهرامات؟",o:["الرومان","المصريون القدماء","الإغريق","الفينيقيون"],a:1,d:"easy"},
+    {q:"أول رئيس أمريكي؟",o:["جيفرسون","آدامز","واشنطن","فرانكلين"],a:2,d:"easy"},
+    {q:"متى انتهت الحرب العالمية الثانية؟",o:["1943","1944","1945","1946"],a:2,d:"easy"},
+    {q:"من اخترع الطباعة؟",o:["جوتنبرج","نيوتن","داڤنشي","فرانكلين"],a:0,d:"easy"},
+    {q:"في أي قرن فتح المسلمون الأندلس؟",o:["السادس","السابع","الثامن","التاسع"],a:2,d:"easy"},
+    {q:"متى بدأت الحرب العالمية الأولى؟",o:["1910","1912","1914","1916"],a:2,d:"easy"},
+    {q:"من كان نابليون بونابرت؟",o:["ملك فرنسا","إمبراطور فرنسا","رئيس فرنسا","قائد عسكري بريطاني"],a:1,d:"easy"},
+    {q:"متى سقط جدار برلين؟",o:["1985","1987","1989","1991"],a:2,d:"medium"},
+    {q:"أكبر إمبراطورية في التاريخ مساحة؟",o:["الرومانية","الإسلامية","البريطانية","المغولية"],a:2,d:"medium"},
+    {q:"متى انتهت الحرب الباردة؟",o:["1985","1989","1991","1993"],a:2,d:"medium"},
+    {q:"من كان أول من يحيط بالكرة الأرضية؟",o:["كولومبوس","ماجلان","ڤاسكو دي غاما","كوك"],a:1,d:"medium"},
+    {q:"في أي عام اكتشف كولومبوس أمريكا؟",o:["1488","1492","1498","1502"],a:1,d:"medium"},
+    {q:"من كان آخر فراعنة مصر؟",o:["رمسيس الثاني","توت عنخ آمون","كليوباترا","نفرتيتي"],a:2,d:"hard"},
+    {q:"أين وقعت معركة ووترلو؟",o:["فرنسا","بريطانيا","بلجيكا","هولندا"],a:2,d:"hard"},
+    {q:"في أي عام تأسست الأمم المتحدة؟",o:["1943","1945","1947","1950"],a:1,d:"hard"},
+    {q:"متى بدأت الثورة الصناعية تقريباً؟",o:["منتصف القرن 17","منتصف القرن 18","بداية القرن 19","نهاية القرن 18"],a:1,d:"hard"},
+    {q:"من قاد الثورة البلشفية في روسيا؟",o:["ستالين","لينين","تروتسكي","خروتشوف"],a:1,d:"hard"},
+  ],
+  football:[
+    {q:"كم مرة فاز البرازيل بكأس العالم؟",o:["3","4","5","6"],a:2,d:"easy"},
+    {q:"أين أقيمت كأس العالم 2022؟",o:["الإمارات","السعودية","قطر","البحرين"],a:2,d:"easy"},
+    {q:"كم لاعباً في كل فريق؟",o:["9","10","11","12"],a:2,d:"easy"},
+    {q:"ما جائزة أفضل لاعب في العالم؟",o:["الكرة الذهبية","القدم الذهبية","النجم الذهبي","كأس العالم"],a:0,d:"easy"},
+    {q:"كم دقيقة في المباراة؟",o:["80","85","90","95"],a:2,d:"easy"},
+    {q:"ما لون بطاقة الطرد في كرة القدم؟",o:["الحمراء","الصفراء","البرتقالية","الخضراء"],a:0,d:"easy"},
+    {q:"من فاز بكأس العالم 2018؟",o:["ألمانيا","البرازيل","فرنسا","كرواتيا"],a:2,d:"medium"},
+    {q:"أكثر فريق فاز بدوري الأبطال؟",o:["برشلونة","ميلان","ريال مدريد","بايرن"],a:2,d:"medium"},
+    {q:"أكثر هداف في تاريخ كأس العالم؟",o:["رونالدو","ميسي","كلوزه","بيليه"],a:2,d:"medium"},
+    {q:"أول فوز فرنسا بكأس العالم؟",o:["1994","1998","2002","2006"],a:1,d:"medium"},
+    {q:"أين ملعب سانتياغو برنابيو؟",o:["برشلونة","مدريد","لندن","مانشستر"],a:1,d:"medium"},
+    {q:"كم مرة فازت إيطاليا بكأس العالم؟",o:["2","3","4","5"],a:2,d:"medium"},
+    {q:"كم مرة فازت ألمانيا بكأس العالم؟",o:["2","3","4","5"],a:2,d:"hard"},
+    {q:"أكثر لاعب حصل على الكرة الذهبية؟",o:["رونالدو","ميسي","زيدان","رونالدينيو"],a:1,d:"hard"},
+    {q:"في أي عام تأسس نادي ريال مدريد؟",o:["1895","1900","1902","1910"],a:2,d:"hard"},
+    {q:"من هو الهداف التاريخي في دوري أبطال أوروبا؟",o:["ميسي","رونالدو","راؤول","فان نيستلروي"],a:1,d:"hard"},
+  ],
+  tech:[
+    {q:"ماذا تعني RAM؟",o:["ذاكرة القراءة","ذاكرة الوصول العشوائي","ذاكرة التطبيقات","وحدة الوصول"],a:1,d:"easy"},
+    {q:"ماذا تعني HTML؟",o:["لغة ترميز النص الفائق","لغة برمجة","محطة النص","لغة الأدوات"],a:0,d:"easy"},
+    {q:"من مؤسس Apple؟",o:["بيل غيتس","ستيف جوبز","زوكربرج","ماسك"],a:1,d:"easy"},
+    {q:"أكثر متصفح استخداماً؟",o:["Firefox","Safari","Chrome","Edge"],a:2,d:"easy"},
+    {q:"أول iPhone صدر عام؟",o:["2005","2006","2007","2008"],a:2,d:"easy"},
+    {q:"كم بت في البايت؟",o:["4","6","8","16"],a:2,d:"easy"},
+    {q:"من أسس Microsoft؟",o:["ستيف جوبز","بيل غيتس","لاري بيج","مارك زوكربرج"],a:1,d:"easy"},
+    {q:"ماذا يعني CPU؟",o:["وحدة القدرة","وحدة المعالجة المركزية","وحدة الطاقة","وحدة البرمجة"],a:1,d:"medium"},
+    {q:"من طور نظام Linux؟",o:["بيل غيتس","ستيف جوبز","لينوس تورفالدز","مارك زوكربرج"],a:2,d:"medium"},
+    {q:"ما هو GPU؟",o:["وحدة المعالجة الرسومية","ذاكرة وصول","معالج صوت","بطاقة شبكة"],a:0,d:"medium"},
+    {q:"ما معنى HTTP؟",o:["بروتوكول نقل النص الفائق","لغة الويب","محرك البحث","نظام الشبكة"],a:0,d:"medium"},
+    {q:"في أي عام تأسست Google؟",o:["1996","1998","2000","2002"],a:1,d:"medium"},
+    {q:"ما هو الرقم الثنائي لعدد 10؟",o:["1001","1010","1100","0110"],a:1,d:"hard"},
+    {q:"من اخترع الشبكة العنكبوتية WWW؟",o:["بيل غيتس","تيم بيرنرز لي","لينوس","إديسون"],a:1,d:"hard"},
+    {q:"ماذا تعني SQL؟",o:["لغة الاستعلام الهيكلية","نظام قواعد البيانات","لغة البرمجة السريعة","واجهة المستخدم"],a:0,d:"hard"},
+    {q:"ما أول لغة برمجة في التاريخ؟",o:["FORTRAN","COBOL","Ada","Assembly"],a:3,d:"hard"},
+  ],
+  games:[
+    {q:"من طور GTA؟",o:["EA","Ubisoft","Rockstar","Activision"],a:2,d:"easy"},
+    {q:"أكثر لعبة مبيعاً في التاريخ؟",o:["Tetris","Minecraft","GTA V","Mario"],a:1,d:"easy"},
+    {q:"من ينتج PlayStation؟",o:["Microsoft","Nintendo","Sony","Sega"],a:2,d:"easy"},
+    {q:"الشخصية الرئيسية في Mario؟",o:["Luigi","Toad","Mario","Bowser"],a:2,d:"easy"},
+    {q:"العدو الأشهر في Minecraft؟",o:["Zombie","Skeleton","Creeper","Enderman"],a:2,d:"easy"},
+    {q:"من ينتج Xbox؟",o:["Sony","Nintendo","Microsoft","Sega"],a:2,d:"easy"},
+    {q:"عالم Zelda يسمى؟",o:["Hyrule","Mushroom Kingdom","Termina","Lorule"],a:0,d:"medium"},
+    {q:"من يطور FIFA؟",o:["Ubisoft","EA Sports","2K","Konami"],a:1,d:"medium"},
+    {q:"أول جيل PlayStation صدر عام؟",o:["1990","1992","1994","1996"],a:2,d:"medium"},
+    {q:"من طور لعبة Among Us؟",o:["Epic","Innersloth","Valve","Mojang"],a:1,d:"medium"},
+    {q:"ما اسم الشخصية الرئيسية في Halo؟",o:["Master Chief","Marcus Fenix","Doomguy","Kratos"],a:0,d:"medium"},
+    {q:"ما اسم شركة Fortnite؟",o:["Activision","Epic Games","Valve","Blizzard"],a:1,d:"medium"},
+    {q:"في أي لعبة تلعب دور Arthur Morgan؟",o:["GTA V","Red Dead Redemption","GTA IV","Red Dead Redemption 2"],a:3,d:"hard"},
+    {q:"ما عدد لاعبين PUBG في الخريطة؟",o:["50","75","100","150"],a:2,d:"hard"},
+    {q:"في أي عام صدر The Last of Us؟",o:["2011","2012","2013","2014"],a:2,d:"hard"},
+    {q:"من طور لعبة Dark Souls؟",o:["Capcom","FromSoftware","Square Enix","Konami"],a:1,d:"hard"},
+  ],
+  cars:[
+    {q:"من صنع أول سيارة في التاريخ؟",o:["فورد","بنز","رولز رويس","بيجو"],a:1,d:"easy"},
+    {q:"أي شركة تنتج Mustang؟",o:["Chevrolet","Ford","Dodge","Pontiac"],a:1,d:"easy"},
+    {q:"Tesla من أي دولة؟",o:["ألمانيا","اليابان","أمريكا","كوريا"],a:2,d:"easy"},
+    {q:"Toyota من أي دولة؟",o:["كوريا","الصين","اليابان","ألمانيا"],a:2,d:"easy"},
+    {q:"كم إطاراً في السيارة العادية؟",o:["3","4","5","6"],a:1,d:"easy"},
+    {q:"ما لون سيارات السباق Ferrari الأشهر؟",o:["الأصفر","الأحمر","الأزرق","الأسود"],a:1,d:"easy"},
+    {q:"Ferrari تأسست في أي دولة؟",o:["فرنسا","ألمانيا","إيطاليا","إسبانيا"],a:2,d:"medium"},
+    {q:"ما معنى BMW؟",o:["مصانع بفاريا للسيارات","أفضل مركبة","مصانع بفاريا للمحركات","سيارات بفاريا"],a:2,d:"medium"},
+    {q:"Rolls-Royce مقرها في؟",o:["لندن","بيرمنغهام","مانشستر","ليدز"],a:0,d:"medium"},
+    {q:"في أي عام تأسست شركة فورد؟",o:["1895","1900","1903","1910"],a:2,d:"medium"},
+    {q:"ما هي سيارة Lamborghini الأشهر؟",o:["Urus","Aventador","Huracan","Gallardo"],a:1,d:"medium"},
+    {q:"ما محرك Bugatti Veyron؟",o:["V8","V10","W16","V12"],a:2,d:"hard"},
+    {q:"ما معنى AMG في مرسيدس؟",o:["Advanced Motor Group","Aufrecht Melcher Großaspach","Auto Motor Germany","Advanced Mercedes Group"],a:1,d:"hard"},
+    {q:"في أي عام بدأ سباق فورمولا 1؟",o:["1945","1950","1955","1960"],a:1,d:"hard"},
+    {q:"ما أول سيارة كهربائية أنتجتها Tesla؟",o:["Model S","Model X","Roadster","Model 3"],a:2,d:"hard"},
+  ],
+  culture:[
+    {q:"من كتب روميو وجولييت؟",o:["ديكنز","شكسبير","تولستوي","هوميروس"],a:1,d:"easy"},
+    {q:"كم عدد ألوان قوس قزح؟",o:["5","6","7","8"],a:2,d:"easy"},
+    {q:"أسرع حيوان في العالم؟",o:["الأسد","النمر","الفهد","الذئب"],a:2,d:"easy"},
+    {q:"من رسم الموناليزا؟",o:["مايكل أنجلو","رافائيل","داڤنشي","بيكاسو"],a:2,d:"easy"},
+    {q:"كم كوكباً في مجموعتنا الشمسية؟",o:["7","8","9","10"],a:1,d:"easy"},
+    {q:"أكبر المحيطات؟",o:["الأطلسي","الهندي","المتجمد","الهادي"],a:3,d:"easy"},
+    {q:"كم يوم في السنة الكبيسة؟",o:["364","365","366","367"],a:2,d:"easy"},
+    {q:"من اخترع الهاتف؟",o:["إديسون","تسلا","غراهام بيل","ماركوني"],a:2,d:"medium"},
+    {q:"من كتب ألف ليلة وليلة؟",o:["مجهول","ابن بطوطة","المتنبي","الجاحظ"],a:0,d:"medium"},
+    {q:"في أي عام اخترع إديسون المصباح؟",o:["1869","1879","1889","1899"],a:1,d:"medium"},
+    {q:"ما أقرب كوكب للشمس؟",o:["الزهرة","عطارد","المريخ","الأرض"],a:1,d:"medium"},
+    {q:"ما أصغر دولة في العالم؟",o:["موناكو","سان مارينو","الفاتيكان","ليختنشتاين"],a:2,d:"medium"},
+    {q:"كم عظمة في جسم الإنسان البالغ؟",o:["186","196","206","216"],a:2,d:"hard"},
+    {q:"من ألّف كتاب الكوميديا الإلهية؟",o:["هوميروس","دانتي","شكسبير","سرفانتيس"],a:1,d:"hard"},
+    {q:"أثقل عنصر طبيعي؟",o:["الذهب","الرصاص","اليورانيوم","الأوزميوم"],a:3,d:"hard"},
+    {q:"ما عدد عناصر الجدول الدوري؟",o:["108","118","128","138"],a:1,d:"hard"},
+  ],
+  funny:[
+    {q:"لو كان لديك ذيل ماذا ستفعل؟",o:["أهزه للجميع","أخبئه","أستخدمه مقعداً","أبيعه"],a:0,d:"easy"},
+    {q:"أصعب شيء بعيون مغمضة؟",o:["المشي","الأكل","الكتابة","الطيران"],a:3,d:"easy"},
+    {q:"لو كنت طعاماً؟",o:["بيتزا","سوشي","برغر","فلافل"],a:0,d:"easy"},
+    {q:"أكثر حيوان كسلاً؟",o:["القطة","الكسلان","الدب","البطريق"],a:1,d:"easy"},
+    {q:"أول شيء عند الاستيقاظ؟",o:["الهاتف","ماء","أكل","رجوع للنوم"],a:3,d:"easy"},
+    {q:"لو كنت خارقاً ما قوتك؟",o:["الطيران","الخفاء","قراءة الأفكار","السرعة"],a:0,d:"easy"},
+    {q:"أكثر شيء تكره؟",o:["التنظيف","الدراسة","الصحيان مبكر","التمرين"],a:2,d:"easy"},
+    {q:"لو فزت بمليون أول شيء؟",o:["سيارة","بيت","سفر","طعام"],a:0,d:"easy"},
+    {q:"ماذا تفعل لو اكتشفت أنك تحلم؟",o:["تطير","تأكل","تسرق","تستمر بالنوم"],a:0,d:"easy"},
+    {q:"أي حيوان تريد صديقاً؟",o:["أسد","دولفين","ببغاء","قطة"],a:1,d:"easy"},
+    {q:"لو قدرت تمسح شيء من التاريخ؟",o:["الحروب","الضرائب","الاختبارات","المدرسة"],a:2,d:"easy"},
+    {q:"أغرب عادة تملكها؟",o:["الأكل وأنت تمشي","الكلام مع نفسك","ترتيب الأشياء بالألوان","لا يوجد"],a:1,d:"easy"},
+  ],
+};
 
-let players=[],playerAvatars={},selectedTopics=[],questionCount=3,questions=[];
+let players=[],playerColors={},selectedTopics=[],questionCount=3,questions=[];
 let currentQ=0,currentPlayerIdx=0,scores={},powerups={};
 let timerVal=15,timerInterval=null,doubled=false,answered=false;
-let darkMode=true,gameMode='normal';
-let playerStats={};
-let selectedAvatar=AVATARS[0];
-let leaderboard=JSON.parse(localStorage.getItem('mc_leaderboard')||'[]');
+let darkMode=true,gameMode='normal',playerStats={},selectedColorIdx=0;
+let leaderboard=JSON.parse(localStorage.getItem('mc_lb3')||'[]');
+let usedQ=JSON.parse(sessionStorage.getItem('mc_used3')||'[]');
+
+const AudioCtx=window.AudioContext||window.webkitAudioContext;
+let actx=null;
+function getACtx(){if(!actx)actx=new AudioCtx();return actx;}
+function playSound(t){
+  try{
+    const c=getACtx(),o=c.createOscillator(),g=c.createGain();
+    o.connect(g);g.connect(c.destination);
+    if(t==='correct'){
+      o.frequency.setValueAtTime(520,c.currentTime);
+      o.frequency.setValueAtTime(660,c.currentTime+0.1);
+      o.frequency.setValueAtTime(800,c.currentTime+0.2);
+      g.gain.setValueAtTime(0.3,c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.4);
+      o.start(c.currentTime);o.stop(c.currentTime+0.4);
+    }else if(t==='wrong'){
+      o.frequency.setValueAtTime(300,c.currentTime);
+      o.frequency.setValueAtTime(200,c.currentTime+0.15);
+      g.gain.setValueAtTime(0.3,c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.35);
+      o.start(c.currentTime);o.stop(c.currentTime+0.35);
+    }else if(t==='tick'){
+      o.frequency.value=880;
+      g.gain.setValueAtTime(0.08,c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.05);
+      o.start(c.currentTime);o.stop(c.currentTime+0.05);
+    }else if(t==='powerup'){
+      o.frequency.setValueAtTime(440,c.currentTime);
+      o.frequency.setValueAtTime(880,c.currentTime+0.1);
+      g.gain.setValueAtTime(0.2,c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.25);
+      o.start(c.currentTime);o.stop(c.currentTime+0.25);
+    }else if(t==='win'){
+      [523,659,784,1047].forEach((f,i)=>{
+        const o2=c.createOscillator(),g2=c.createGain();
+        o2.connect(g2);g2.connect(c.destination);
+        o2.frequency.value=f;
+        g2.gain.setValueAtTime(0.2,c.currentTime+i*0.13);
+        g2.gain.exponentialRampToValueAtTime(0.001,c.currentTime+i*0.13+0.2);
+        o2.start(c.currentTime+i*0.13);o2.stop(c.currentTime+i*0.13+0.25);
+      });
+    }
+  }catch(e){}
+}
 
 function toggleTheme(){
   darkMode=!darkMode;
   document.body.classList.toggle('light',!darkMode);
   document.getElementById('theme-btn').textContent=darkMode?'🌙':'☀️';
 }
-
 function goTo(s){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
   document.getElementById('screen-'+s).classList.add('active');
@@ -230,54 +411,42 @@ function goTo(s){
   if(s==='leaderboard')renderLeaderboard();
 }
 
-function showTab(t){ goTo(t); }
-
-// Avatar picker
-(function(){
-  const div=document.getElementById('avatar-picker');
-  div.innerHTML=AVATARS.map((a,i)=>`<button class="avatar-btn ${i===0?'selected':''}" onclick="selectAvatar('${a}',this)">${a}</button>`).join('');
+(function initAvatars(){
+  document.getElementById('avatar-picker').innerHTML=AVATAR_COLORS.map((c,i)=>`
+    <div class="avatar-circle ${i===0?'selected':''}" style="background:${c.bg}" onclick="selectColor(${i},this)">●</div>`).join('');
 })();
 
-function selectAvatar(a,btn){
-  selectedAvatar=a;
-  document.querySelectorAll('.avatar-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
+function selectColor(i,el){
+  selectedColorIdx=i;
+  document.querySelectorAll('.avatar-circle').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
 }
-
 function addPlayer(){
-  const input=document.getElementById('player-input');
-  const name=input.value.trim();
+  const inp=document.getElementById('player-input');
+  const name=inp.value.trim();
   if(!name||players.length>=8||players.includes(name))return;
   players.push(name);
-  playerAvatars[name]=selectedAvatar;
-  input.value='';
+  playerColors[name]=AVATAR_COLORS[selectedColorIdx];
+  inp.value='';
   renderPlayers();
 }
-
-function removePlayer(name){
-  players=players.filter(p=>p!==name);
-  renderPlayers();
-}
-
+function removePlayer(name){players=players.filter(p=>p!==name);renderPlayers();}
 function renderPlayers(){
   document.getElementById('player-count').textContent=players.length+'/8';
   document.getElementById('players-hint').style.display=players.length>=1?'none':'block';
   document.getElementById('btn-to-topics').disabled=players.length<1;
-  document.getElementById('players-list').innerHTML=players.map((p,i)=>`
+  document.getElementById('players-list').innerHTML=players.map(p=>`
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
       <div style="display:flex;align-items:center;gap:10px">
-        <span style="font-size:24px">${playerAvatars[p]||'⚡'}</span>
+        <div style="width:36px;height:36px;border-radius:50%;background:${playerColors[p]?.bg||'#6366F1'};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:15px">${p[0].toUpperCase()}</div>
         <span style="font-weight:700">${p}</span>
       </div>
       <button onclick="removePlayer('${p}')" style="background:none;border:none;color:#EF4444;cursor:pointer;font-size:18px">✕</button>
     </div>`).join('');
 }
-
 function renderTopics(){
   document.getElementById('topics-grid').innerHTML=TOPICS.map(t=>`
-    <div class="topic-card" id="topic-${t.id}"
-      style="border-color:${selectedTopics.includes(t.id)?t.color:'var(--border)'};background:${selectedTopics.includes(t.id)?t.color+'22':'var(--card)'}"
-      onclick="toggleTopic('${t.id}')">
+    <div class="topic-card" style="border-color:${selectedTopics.includes(t.id)?t.color:'var(--border)'};background:${selectedTopics.includes(t.id)?t.color+'22':'var(--card)'}" onclick="toggleTopic('${t.id}')">
       ${selectedTopics.includes(t.id)?`<div style="position:absolute;top:8px;left:8px;width:18px;height:18px;border-radius:50%;background:${t.color};display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px">✓</div>`:''}
       <div style="font-size:30px;margin-bottom:6px">${t.emoji}</div>
       <div style="font-weight:700;font-size:13px">${t.label}</div>
@@ -285,57 +454,39 @@ function renderTopics(){
   document.getElementById('topics-count').textContent=selectedTopics.length+' مختار';
   document.getElementById('btn-start').disabled=selectedTopics.length===0;
 }
-
 function toggleTopic(id){
   selectedTopics=selectedTopics.includes(id)?selectedTopics.filter(x=>x!==id):[...selectedTopics,id];
   renderTopics();
 }
-
 function setCount(n){
   questionCount=n;
   document.querySelectorAll('.count-btn').forEach(b=>b.classList.toggle('active',parseInt(b.textContent)===n));
 }
-
 function setMode(m){
   gameMode=m;
   document.getElementById('tab-normal').classList.toggle('active',m==='normal');
   document.getElementById('tab-speed').classList.toggle('active',m==='speed');
 }
-
-// AI Question Generation
-async function generateQuestions(){
-  const topicLabels=selectedTopics.map(id=>TOPICS.find(t=>t.id===id)?.label).join('، ');
+function buildQuestions(){
   const total=players.length*questionCount;
-  const prompt=`أنت مولّد أسئلة مسابقة. اولد ${total} سؤال متنوع باللغة العربية عن المواضيع التالية: ${topicLabels}.
-كل سؤال يجب أن يكون مختلف تماماً وغير مكرر. اجعل بعض الأسئلة سهلة وبعضها صعبة.
-أعد JSON فقط بدون أي نص إضافي بهذا الشكل:
-{"questions":[{"q":"السؤال؟","options":["أ","ب","ج","د"],"answer":0,"topic":"geography"},{"q":"...","options":["أ","ب","ج","د"],"answer":1,"topic":"tech"}]}
-المواضيع المتاحة: geography,history,football,tech,games,cars,culture,funny
-الإجابة الصحيحة هي index من 0 إلى 3. تأكد أن الإجابة صحيحة فعلاً.`;
-
-  const res=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      model:"claude-sonnet-4-20250514",
-      max_tokens:1000,
-      messages:[{role:"user",content:prompt}]
-    })
+  let pool=[];
+  selectedTopics.forEach(tid=>{
+    (QB[tid]||[]).forEach((q,i)=>pool.push({...q,topic:tid,uid:tid+i}));
   });
-  const data=await res.json();
-  const text=data.content.map(c=>c.text||'').join('');
-  const clean=text.replace(/```json|```/g,'').trim();
-  const parsed=JSON.parse(clean);
-  return parsed.questions;
+  let fresh=pool.filter(q=>!usedQ.includes(q.uid));
+  if(fresh.length<total){usedQ=[];fresh=pool;}
+  const easy=fresh.filter(q=>q.d==='easy').sort(()=>Math.random()-0.5);
+  const med=fresh.filter(q=>q.d==='medium').sort(()=>Math.random()-0.5);
+  const hard=fresh.filter(q=>q.d==='hard').sort(()=>Math.random()-0.5);
+  const eC=Math.ceil(total*0.5),mC=Math.ceil(total*0.35),hC=Math.max(0,total-eC-mC);
+  const sel=[...easy.slice(0,eC),...med.slice(0,mC),...hard.slice(0,hC)].slice(0,total);
+  sel.sort(()=>Math.random()-0.5);
+  sel.forEach(q=>{if(!usedQ.includes(q.uid))usedQ.push(q.uid);});
+  sessionStorage.setItem('mc_used3',JSON.stringify(usedQ));
+  return sel;
 }
-
-async function startGame(){
-  goTo('loading');
-  try{
-    questions=await generateQuestions();
-  }catch(e){
-    questions=getFallbackQuestions();
-  }
+function startGame(){
+  questions=buildQuestions();
   scores={};powerups={};playerStats={};
   players.forEach(p=>{
     scores[p]=0;
@@ -346,294 +497,168 @@ async function startGame(){
   goTo('game');
   renderQuestion();
 }
-
-function getFallbackQuestions(){
-  const fallback={
-    geography:[
-      {q:"عاصمة فرنسا؟",options:["برلين","باريس","روما","مدريد"],answer:1,topic:"geography"},
-      {q:"أكبر قارة؟",options:["أفريقيا","أمريكا","آسيا","أوروبا"],answer:2,topic:"geography"},
-      {q:"أطول نهر؟",options:["الأمازون","النيل","المسيسيبي","الفولغا"],answer:1,topic:"geography"},
-      {q:"عاصمة اليابان؟",options:["بكين","طوكيو","سيول","بانكوك"],answer:1,topic:"geography"},
-      {q:"عاصمة البرازيل؟",options:["ريو","ساو باولو","برازيليا","سلفادور"],answer:2,topic:"geography"},
-      {q:"أكبر دولة مساحة؟",options:["كندا","الصين","أمريكا","روسيا"],answer:3,topic:"geography"},
-      {q:"عاصمة أستراليا؟",options:["سيدني","ملبورن","كانبيرا","بريسبان"],answer:2,topic:"geography"},
-      {q:"عاصمة كندا؟",options:["تورنتو","فانكوفر","مونتريال","أوتاوا"],answer:3,topic:"geography"},
-      {q:"أين جبل إيفرست؟",options:["الصين","نيبال","الهند","باكستان"],answer:1,topic:"geography"},
-      {q:"عاصمة إيطاليا؟",options:["ميلان","فينيسيا","روما","نابولي"],answer:2,topic:"geography"},
-    ],
-    history:[
-      {q:"متى الثورة الفرنسية؟",options:["1776","1789","1812","1848"],answer:1,topic:"history"},
-      {q:"من بنى الأهرامات؟",options:["الرومان","المصريون","الإغريق","الفينيقيون"],answer:1,topic:"history"},
-      {q:"متى سقط جدار برلين؟",options:["1985","1987","1989","1991"],answer:2,topic:"history"},
-      {q:"أول رئيس أمريكي؟",options:["جيفرسون","آدامز","واشنطن","فرانكلين"],answer:2,topic:"history"},
-      {q:"متى الحرب العالمية الثانية؟",options:["1935","1937","1939","1941"],answer:2,topic:"history"},
-      {q:"أكبر إمبراطورية في التاريخ؟",options:["الرومانية","الإسلامية","البريطانية","المغولية"],answer:2,topic:"history"},
-      {q:"من اخترع الطباعة؟",options:["جوتنبرج","نيوتن","داڤنشي","فرانكلين"],answer:0,topic:"history"},
-      {q:"عاصمة الإمبراطورية الرومانية؟",options:["أثينا","روما","القسطنطينية","قرطاج"],answer:1,topic:"history"},
-      {q:"متى فتح صلاح الدين القدس؟",options:["1187","1204","1215","1258"],answer:0,topic:"history"},
-      {q:"من قاد الثورة الأمريكية؟",options:["لينكولن","واشنطن","جيفرسون","فرانكلين"],answer:1,topic:"history"},
-    ],
-    football:[
-      {q:"كم مرة فاز البرازيل بكأس العالم؟",options:["3","4","5","6"],answer:2,topic:"football"},
-      {q:"أين كأس العالم 2022؟",options:["الإمارات","السعودية","قطر","البحرين"],answer:2,topic:"football"},
-      {q:"أكثر فريق في دوري الأبطال؟",options:["برشلونة","ميلان","ريال مدريد","بايرن"],answer:2,topic:"football"},
-      {q:"الكرة الذهبية لماذا تُمنح؟",options:["أفضل مدرب","أفضل لاعب","أفضل هداف","أفضل حارس"],answer:1,topic:"football"},
-      {q:"كم لاعباً في كل فريق؟",options:["9","10","11","12"],answer:2,topic:"football"},
-      {q:"أين ملعب برنابيو؟",options:["برشلونة","مدريد","لندن","مانشستر"],answer:1,topic:"football"},
-      {q:"كم دقيقة المباراة؟",options:["80","85","90","95"],answer:2,topic:"football"},
-      {q:"أول فوز فرنسا بكأس العالم؟",options:["1994","1998","2002","2006"],answer:1,topic:"football"},
-      {q:"هداف كأس العالم التاريخي؟",options:["رونالدو","ميسي","كلوزه","بيليه"],answer:2,topic:"football"},
-      {q:"ما القاعدة التسللية؟",options:["الركض السريع","اللاعب أمام المدافع الأخير","الركل الخلفي","الإمساك بالقميص"],answer:1,topic:"football"},
-    ],
-    tech:[
-      {q:'ماذا تعني RAM؟',options:["ذاكرة القراءة","ذاكرة الوصول العشوائي","ذاكرة التطبيقات","وحدة الوصول"],answer:1,topic:"tech"},
-      {q:'ماذا تعني HTML؟',options:["لغة ترميز النص الفائق","لغة برمجة","محطة النص","لغة الأدوات"],answer:0,topic:"tech"},
-      {q:"من مؤسس Apple؟",options:["بيل غيتس","ستيف جوبز","زوكربرج","ماسك"],answer:1,topic:"tech"},
-      {q:"أكثر متصفح استخداماً؟",options:["Firefox","Safari","Chrome","Edge"],answer:2,topic:"tech"},
-      {q:"أول iPhone صدر عام؟",options:["2005","2006","2007","2008"],answer:2,topic:"tech"},
-      {q:"كم بت في البايت؟",options:["4","6","8","16"],answer:2,topic:"tech"},
-      {q:"من طور نظام Linux؟",options:["بيل غيتس","ستيف جوبز","لينوس تورفالدز","مارك زوكربرج"],answer:2,topic:"tech"},
-      {q:"ما هو Python؟",options:["متصفح","لغة برمجة","نظام تشغيل","شبكة اجتماعية"],answer:1,topic:"tech"},
-      {q:"الذكاء الاصطناعي من OpenAI؟",options:["Gemini","Claude","ChatGPT","Copilot"],answer:2,topic:"tech"},
-      {q:"ما هو GPU؟",options:["وحدة المعالجة الرسومية","ذاكرة الوصول","معالج الصوت","بطاقة الشبكة"],answer:0,topic:"tech"},
-    ],
-    games:[
-      {q:"من طور GTA؟",options:["EA","Ubisoft","Rockstar","Activision"],answer:2,topic:"games"},
-      {q:"أكثر لعبة مبيعاً؟",options:["Tetris","Minecraft","GTA V","Mario"],answer:1,topic:"games"},
-      {q:"العدو الأشهر في Minecraft؟",options:["Zombie","Skeleton","Creeper","Enderman"],answer:2,topic:"games"},
-      {q:"من ينتج PlayStation؟",options:["Microsoft","Nintendo","Sony","Sega"],answer:2,topic:"games"},
-      {q:"عالم Zelda يسمى؟",options:["Hyrule","Mushroom Kingdom","Termina","Lorule"],answer:0,topic:"games"},
-      {q:"الشخصية الرئيسية في Mario؟",options:["Luigi","Toad","Mario","Bowser"],answer:2,topic:"games"},
-      {q:"من يطور FIFA؟",options:["Ubisoft","EA Sports","2K","Konami"],answer:1,topic:"games"},
-      {q:"ما اسم سلاح Fortnite الأشهر؟",options:["AK47","Sniper","Shotgun","RPG"],answer:2,topic:"games"},
-      {q:"أول جيل PlayStation صدر عام؟",options:["1990","1992","1994","1996"],answer:2,topic:"games"},
-      {q:"من طور لعبة Among Us؟",options:["Epic","Innersloth","Valve","Mojang"],answer:1,topic:"games"},
-    ],
-    cars:[
-      {q:"من صنع أول سيارة؟",options:["فورد","بنز","رولز رويس","بيجو"],answer:1,topic:"cars"},
-      {q:"Ferrari تأسست في؟",options:["فرنسا","ألمانيا","إيطاليا","إسبانيا"],answer:2,topic:"cars"},
-      {q:"ما معنى BMW؟",options:["مصانع بفاريا للسيارات","أفضل مركبة","مصانع بفاريا للمحركات","سيارات بفاريا"],answer:2,topic:"cars"},
-      {q:"من ينتج Mustang؟",options:["Chevrolet","Ford","Dodge","Pontiac"],answer:1,topic:"cars"},
-      {q:"أول شركة سيارات كهربائية شهيرة؟",options:["Rivian","Lucid","Tesla","NIO"],answer:2,topic:"cars"},
-      {q:"Toyota من أي دولة؟",options:["كوريا","الصين","اليابان","ألمانيا"],answer:2,topic:"cars"},
-      {q:"عاصمة صناعة السيارات الأمريكية؟",options:["نيويورك","شيكاغو","ديترويت","لوس أنجلوس"],answer:2,topic:"cars"},
-      {q:"Rolls-Royce مقرها في؟",options:["لندن","بيرمنغهام","مانشستر","ليدز"],answer:0,topic:"cars"},
-      {q:"كم إطاراً في السيارة؟",options:["3","4","5","6"],answer:1,topic:"cars"},
-      {q:"ما هي سيارة لامبورغيني الأشهر؟",options:["Urus","Aventador","Huracan","Gallardo"],answer:1,topic:"cars"},
-    ],
-    culture:[
-      {q:"من كتب روميو وجولييت؟",options:["ديكنز","شكسبير","تولستوي","هوميروس"],answer:1,topic:"culture"},
-      {q:"كم عدد ألوان قوس قزح؟",options:["5","6","7","8"],answer:2,topic:"culture"},
-      {q:"أسرع حيوان؟",options:["الأسد","النمر","الفهد","الذئب"],answer:2,topic:"culture"},
-      {q:"من رسم الموناليزا؟",options:["مايكل أنجلو","رافائيل","داڤنشي","بيكاسو"],answer:2,topic:"culture"},
-      {q:"كم كوكباً في مجموعتنا الشمسية؟",options:["7","8","9","10"],answer:1,topic:"culture"},
-      {q:"أكبر المحيطات؟",options:["الأطلسي","الهندي","المتجمد","الهادي"],answer:3,topic:"culture"},
-      {q:"من اخترع الهاتف؟",options:["إديسون","تسلا","غراهام بيل","ماركوني"],answer:2,topic:"culture"},
-      {q:"كم يوم في السنة الكبيسة؟",options:["364","365","366","367"],answer:2,topic:"culture"},
-      {q:"أثقل عنصر طبيعي؟",options:["الذهب","الرصاص","اليورانيوم","الأوزميوم"],answer:3,topic:"culture"},
-      {q:"من كتب ألف ليلة وليلة؟",options:["مجهول","ابن بطوطة","المتنبي","الجاحظ"],answer:0,topic:"culture"},
-    ],
-    funny:[
-      {q:"لو كان لديك ذيل ماذا ستفعل؟",options:["أهزه","أخبئه","أستخدمه مقعداً","أبيعه"],answer:0,topic:"funny"},
-      {q:"أصعب شيء بعيون مغمضة؟",options:["المشي","الأكل","الكتابة","الطيران"],answer:3,topic:"funny"},
-      {q:"لو كنت طعاماً؟",options:["بيتزا","سوشي","برغر","فلافل"],answer:0,topic:"funny"},
-      {q:"أكثر حيوان كسلاً؟",options:["القطة","الكسلان","الدب","البطريق"],answer:1,topic:"funny"},
-      {q:"أول شيء عند الاستيقاظ؟",options:["الهاتف","ماء","أكل","رجوع للنوم"],answer:3,topic:"funny"},
-      {q:"لو كنت خارقاً ما قوتك؟",options:["الطيران","الخفاء","قراءة الأفكار","السرعة"],answer:0,topic:"funny"},
-      {q:"أكثر شيء تكره؟",options:["التنظيف","الدراسة","الصحيان مبكر","التمرين"],answer:2,topic:"funny"},
-      {q:"لو فزت بمليون أول شيء؟",options:["سيارة","بيت","سفر","طعام"],answer:0,topic:"funny"},
-      {q:"ماذا تفعل لو اكتشفت أنك تحلم؟",options:["تطير","تأكل","تسرق","تستمر بالنوم"],answer:0,topic:"funny"},
-      {q:"أي حيوان تريد أن يكون صديقك؟",options:["أسد","دولفين","ببغاء","قطة"],answer:1,topic:"funny"},
-    ],
-  };
-  let pool=[];
-  selectedTopics.forEach(t=>(fallback[t]||[]).forEach(q=>pool.push(q)));
-  pool.sort(()=>Math.random()-0.5);
-  return pool.slice(0,players.length*questionCount);
+function getDiff(d){
+  if(d==='easy')return{label:'سهل',cls:'diff-easy'};
+  if(d==='medium')return{label:'متوسط',cls:'diff-medium'};
+  return{label:'صعب',cls:'diff-hard'};
 }
-
 function renderQuestion(){
   if(currentQ>=questions.length){showResults();return;}
   const q=questions[currentQ];
   const player=players[currentPlayerIdx];
-  const color=PLAYER_COLORS[currentPlayerIdx];
+  const pColor=playerColors[player]?.bg||'#6366F1';
   answered=false;doubled=false;
-  const timeLimit=gameMode==='speed'?5:15;
-
-  document.getElementById('player-avatar-display').textContent=playerAvatars[player]||'⚡';
+  const tLimit=gameMode==='speed'?5:15;
+  const av=document.getElementById('player-avatar-display');
+  av.style.background=pColor;av.textContent=player[0].toUpperCase();
   document.getElementById('current-score').textContent=scores[player]||0;
   const topic=TOPICS.find(t=>t.id===q.topic);
   document.getElementById('topic-badge').textContent=(topic?.emoji||'')+' '+(topic?.label||'');
+  const dif=getDiff(q.d||'easy');
+  const db=document.getElementById('diff-badge');
+  db.textContent=dif.label;db.className='diff-badge '+dif.cls;
   document.getElementById('q-counter').textContent=(currentQ+1)+' / '+questions.length;
   document.getElementById('progress-fill').style.width=((currentQ/questions.length)*100)+'%';
   document.getElementById('current-player-badge').textContent=player;
-  document.getElementById('current-player-badge').style.background=color;
+  document.getElementById('current-player-badge').style.background=pColor;
   document.getElementById('double-banner').style.display='none';
-  document.getElementById('speed-indicator').style.display=gameMode==='speed'?'block':'none';
   document.getElementById('question-text').textContent=q.q;
   document.getElementById('btn-next').style.display='none';
-
-  document.getElementById('options-container').innerHTML=(q.options||[]).map((opt,i)=>`
+  document.getElementById('options-container').innerHTML=(q.o||[]).map((opt,i)=>`
     <button class="option-btn" id="opt-${i}" onclick="handleAnswer(${i})">
       <span style="width:28px;height:28px;border-radius:50%;background:#6366F122;color:#818CF8;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0">${['A','B','C','D'][i]}</span>${opt}
     </button>`).join('');
-
   document.getElementById('powerups-container').innerHTML=POWERUPS_DEF.map(pu=>`
     <button class="powerup-btn" id="pu-${pu.id}"
       style="border-color:${powerups[player][pu.id]?pu.color:'transparent'};color:${pu.color};background:${powerups[player][pu.id]?pu.color+'22':'var(--border)'}"
       ${!powerups[player][pu.id]||gameMode==='speed'?'disabled':''}
       onclick="usePowerup('${pu.id}')" title="${pu.label}">${pu.icon}</button>`).join('');
-
-  startTimer(timeLimit);
+  startTimer(tLimit);
 }
-
 function startTimer(limit){
   clearInterval(timerInterval);timerVal=limit;updateTimer();
   timerInterval=setInterval(()=>{
-    timerVal--;updateTimer();
+    timerVal--;
+    if(timerVal<=5)playSound('tick');
+    updateTimer();
     if(timerVal<=0){clearInterval(timerInterval);if(!answered)handleAnswer(-1);}
   },1000);
 }
-
 function updateTimer(){
   document.getElementById('timer-num').textContent=timerVal;
   document.getElementById('timer-box').classList.toggle('danger',timerVal<=5);
 }
-
 function handleAnswer(idx){
   if(answered)return;
   answered=true;clearInterval(timerInterval);
   const q=questions[currentQ];
   const player=players[currentPlayerIdx];
   playerStats[player].total++;
-
-  for(let i=0;i<(q.options||[]).length;i++){
+  const isCorrect=idx===q.a;
+  if(isCorrect){playSound('correct');playerStats[player].correct++;}
+  else if(idx!==-1){playSound('wrong');playerStats[player].wrong++;}
+  for(let i=0;i<(q.o||[]).length;i++){
     const btn=document.getElementById('opt-'+i);
     if(!btn)continue;
     btn.disabled=true;
-    if(i===q.answer)btn.classList.add('correct');
+    if(i===q.a)btn.classList.add('correct');
     else if(i===idx)btn.classList.add('wrong');
     const span=btn.querySelector('span');
     if(span){
-      if(i===q.answer){span.style.background='#10B981';span.style.color='#fff';span.textContent='✓';}
+      if(i===q.a){span.style.background='#10B981';span.style.color='#fff';span.textContent='✓';}
       else if(i===idx){span.style.background='#EF4444';span.style.color='#fff';span.textContent='✕';}
     }
   }
-
-  if(idx===q.answer){
-    playerStats[player].correct++;
+  if(isCorrect){
     const pts=doubled?20:10;
     scores[player]=(scores[player]||0)+pts;
     document.getElementById('current-score').textContent=scores[player];
-  } else if(idx!==-1){
-    playerStats[player].wrong++;
+    const sc=document.getElementById('current-score');
+    sc.classList.add('pulse');setTimeout(()=>sc.classList.remove('pulse'),300);
   }
-
   document.getElementById('btn-next').style.display='block';
   document.getElementById('btn-next').textContent=currentQ+1>=questions.length?'🏆 النتائج':'السؤال التالي →';
 }
-
 function nextQuestion(){
-  currentQ++;
-  currentPlayerIdx=(currentPlayerIdx+1)%players.length;
-  renderQuestion();
+  currentQ++;currentPlayerIdx=(currentPlayerIdx+1)%players.length;renderQuestion();
 }
-
 function usePowerup(type){
   if(answered||gameMode==='speed')return;
   const player=players[currentPlayerIdx];
   if(!powerups[player][type])return;
-  powerups[player][type]=false;
+  powerups[player][type]=false;playSound('powerup');
   const btn=document.getElementById('pu-'+type);
   if(btn){btn.disabled=true;btn.style.opacity='0.25';}
   if(type==='eliminate'){
     const q=questions[currentQ];
-    [0,1,2,3].filter(i=>i!==q.answer).sort(()=>Math.random()-0.5).slice(0,2).forEach(i=>{
-      const b=document.getElementById('opt-'+i);
-      if(b){b.classList.add('eliminated');b.disabled=true;}
+    [0,1,2,3].filter(i=>i!==q.a).sort(()=>Math.random()-0.5).slice(0,2).forEach(i=>{
+      const b=document.getElementById('opt-'+i);if(b){b.classList.add('eliminated');b.disabled=true;}
     });
-  }else if(type==='double'){
-    doubled=true;document.getElementById('double-banner').style.display='block';
-  }else if(type==='skip'){
-    answered=true;clearInterval(timerInterval);nextQuestion();
-  }else if(type==='time'){
-    timerVal+=15;updateTimer();
-  }
+  }else if(type==='double'){doubled=true;document.getElementById('double-banner').style.display='block';}
+  else if(type==='skip'){answered=true;clearInterval(timerInterval);nextQuestion();}
+  else if(type==='time'){timerVal+=15;updateTimer();}
 }
-
 function showResults(){
-  // Save to leaderboard
-  players.forEach(p=>{
-    leaderboard.push({name:p,avatar:playerAvatars[p]||'⚡',score:scores[p]||0,date:new Date().toLocaleDateString('ar')});
+  playSound('win');
+  const sorted=[...players].sort((a,b)=>(scores[b]||0)-(scores[a]||0));
+  sorted.forEach(p=>{
+    leaderboard.push({name:p,color:playerColors[p]?.bg||'#6366F1',letter:p[0].toUpperCase(),score:scores[p]||0,date:new Date().toLocaleDateString('ar')});
   });
   leaderboard.sort((a,b)=>b.score-a.score);
   leaderboard=leaderboard.slice(0,20);
-  localStorage.setItem('mc_leaderboard',JSON.stringify(leaderboard));
-
+  localStorage.setItem('mc_lb3',JSON.stringify(leaderboard));
   goTo('results');
-  const sorted=[...players].sort((a,b)=>(scores[b]||0)-(scores[a]||0));
   const medals=['🥇','🥈','🥉'];
   document.getElementById('results-list').innerHTML=sorted.map((p,i)=>`
     <div class="result-row ${i===0?'first':''}">
       <div style="display:flex;align-items:center;gap:12px">
         <span style="font-size:26px">${medals[i]||'#'+(i+1)}</span>
-        <span style="font-size:22px">${playerAvatars[p]||'⚡'}</span>
+        <div style="width:36px;height:36px;border-radius:50%;background:${playerColors[p]?.bg||'#6366F1'};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:15px">${p[0].toUpperCase()}</div>
         <span style="font-weight:800;font-size:17px">${p}</span>
       </div>
       <span class="score-badge ${i===0?'gold':''}">${scores[p]||0} ⭐</span>
     </div>`).join('');
-
-  // Stats
-  const statsHTML=sorted.map(p=>{
-    const st=playerStats[p]||{correct:0,wrong:0,total:0};
-    const pct=st.total>0?Math.round((st.correct/st.total)*100):0;
-    return `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:8px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-        <span style="font-weight:700">${playerAvatars[p]||'⚡'} ${p}</span>
-        <span style="color:var(--subtext);font-size:13px">${st.correct}/${st.total} صحيح</span>
-      </div>
-      <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${pct}%"></div></div>
-      <div style="text-align:left;font-size:12px;color:var(--subtext);margin-top:4px">${pct}%</div>
-    </div>`;
-  }).join('');
-  document.getElementById('stats-section').innerHTML=`<h3 style="font-size:16px;font-weight:800;margin-bottom:10px;color:var(--subtext)">📊 الإحصائيات</h3>${statsHTML}`;
+  document.getElementById('stats-section').innerHTML='<h3 style="font-size:16px;font-weight:800;margin-bottom:10px;color:var(--subtext)">📊 الإحصائيات</h3>'+
+    sorted.map(p=>{
+      const st=playerStats[p]||{correct:0,total:0};
+      const pct=st.total>0?Math.round((st.correct/st.total)*100):0;
+      return `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:28px;height:28px;border-radius:50%;background:${playerColors[p]?.bg||'#6366F1'};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:12px">${p[0].toUpperCase()}</div>
+            <span style="font-weight:700">${p}</span>
+          </div>
+          <span style="color:var(--subtext);font-size:13px">${st.correct}/${st.total} صحيح</span>
+        </div>
+        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${pct}%"></div></div>
+        <div style="text-align:left;font-size:12px;color:var(--subtext);margin-top:4px">${pct}%</div>
+      </div>`;
+    }).join('');
 }
-
 function renderLeaderboard(){
-  if(leaderboard.length===0){
-    document.getElementById('leaderboard-list').innerHTML=`<div style="text-align:center;padding:40px;color:var(--subtext)">لا يوجد سجلات بعد 🏆</div>`;
-    return;
+  if(!leaderboard.length){
+    document.getElementById('leaderboard-list').innerHTML='<div style="text-align:center;padding:40px;color:var(--subtext)">لا يوجد سجلات بعد 🏆</div>';return;
   }
   document.getElementById('leaderboard-list').innerHTML=leaderboard.slice(0,10).map((e,i)=>`
     <div class="leaderboard-row">
       <div style="display:flex;align-items:center;gap:10px">
         <span style="font-weight:900;color:var(--subtext);width:20px">${i+1}</span>
-        <span style="font-size:20px">${e.avatar}</span>
-        <div>
-          <div style="font-weight:700">${e.name}</div>
-          <div style="font-size:11px;color:var(--subtext)">${e.date}</div>
-        </div>
+        <div style="width:34px;height:34px;border-radius:50%;background:${e.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:14px">${e.letter}</div>
+        <div><div style="font-weight:700">${e.name}</div><div style="font-size:11px;color:var(--subtext)">${e.date}</div></div>
       </div>
       <span class="score-badge" style="font-size:14px;padding:3px 12px">${e.score} ⭐</span>
     </div>`).join('');
 }
-
-function clearLeaderboard(){
-  leaderboard=[];
-  localStorage.setItem('mc_leaderboard','[]');
-  renderLeaderboard();
-}
-
+function clearLeaderboard(){leaderboard=[];localStorage.setItem('mc_lb3','[]');renderLeaderboard();}
 function resetGame(){
-  players=[];playerAvatars={};selectedTopics=[];questionCount=3;questions=[];
+  players=[];playerColors={};selectedTopics=[];questionCount=3;questions=[];
   currentQ=0;currentPlayerIdx=0;scores={};powerups={};
-  goTo('home');
   document.getElementById('players-list').innerHTML='';
   document.getElementById('player-count').textContent='0/8';
   document.getElementById('players-hint').style.display='block';
   document.getElementById('btn-to-topics').disabled=true;
+  goTo('home');
 }
-
 renderTopics();
 </script>
 </body>
